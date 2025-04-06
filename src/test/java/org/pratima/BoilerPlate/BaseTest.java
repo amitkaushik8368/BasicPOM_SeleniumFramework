@@ -18,6 +18,7 @@ public class BaseTest
         EdgeOptions options = new EdgeOptions();
         options.addArguments("--start-maximized");
         driver = new EdgeDriver(options);
+
     }
 
     @AfterTest
