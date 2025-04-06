@@ -3,16 +3,13 @@ package org.pratima.BoilerPlate;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 
 public class BaseTest
 {
     public WebDriver driver;
 
-    @BeforeTest
+    @BeforeClass
     public void startBrowser()
     {
         EdgeOptions options = new EdgeOptions();
@@ -21,7 +18,7 @@ public class BaseTest
 
     }
 
-    @AfterTest
+    @AfterClass
     public void closeBrowser()
     {
         try {

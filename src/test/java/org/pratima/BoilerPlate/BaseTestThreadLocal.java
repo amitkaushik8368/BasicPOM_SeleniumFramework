@@ -6,37 +6,40 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
-public class BaseTestMultiBrowser
+public class BaseTestThreadLocal
 {
-    public WebDriver driver;
+    private static final ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
 
-    @BeforeTest
+
+    @BeforeMethod
     @Parameters("browser")
     public void startBrowser(@Optional("edge") String browser)
     {
+        WebDriver localDriver = null;
         switch (browser.toLowerCase()){
             case "chrome" :
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--start-maximized");
-                driver = new ChromeDriver(chromeOptions);
+                localDriver = new ChromeDriver();
                 break;
             case "edge" :
-                EdgeOptions edgeOptions = new EdgeOptions();
-                edgeOptions.addArguments("--start-maximized");
-                driver = new EdgeDriver(edgeOptions);
+                localDriver = new EdgeDriver();
                 break;
-
             default:
                 throw new IllegalArgumentException("Browser Not Supported : " + browser);
         }
+        localDriver.manage().window().maximize();
+        threadLocal.set(localDriver);
 
     }
-    @AfterTest
+
+    public WebDriver getDriver()
+    {
+        return threadLocal.get();
+    }
+
+
+    @AfterMethod
     public void closeBrowser()
     {
         try {
@@ -44,7 +47,10 @@ public class BaseTestMultiBrowser
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        if (driver!=null)
-            driver.quit();
+        if (getDriver()!=null)
+        {
+            getDriver().quit();
+            threadLocal.remove();
+        }
     }
 }
