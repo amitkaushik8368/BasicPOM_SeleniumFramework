@@ -24,5 +24,6 @@ public class LoginTest extends BaseTest
     public void loginTestingAcademy()
     {
         driver.get("https://courses.thetestingacademy.com/");
+
     }
 }
