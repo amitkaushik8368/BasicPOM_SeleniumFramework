@@ -9,7 +9,7 @@ public class BaseTest
 {
     public WebDriver driver;
 
-    @BeforeClass
+    @BeforeMethod
     public void startBrowser()
     {
         EdgeOptions options = new EdgeOptions();
@@ -18,7 +18,7 @@ public class BaseTest
 
     }
 
-    @AfterClass
+    @AfterMethod
     public void closeBrowser()
     {
         try {

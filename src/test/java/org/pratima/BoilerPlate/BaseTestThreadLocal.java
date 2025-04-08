@@ -8,6 +8,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.testng.annotations.*;
 
+
+
 public class BaseTestThreadLocal
 {
     private static final ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
@@ -33,7 +35,7 @@ public class BaseTestThreadLocal
 
     }
 
-    public WebDriver getDriver()
+    public WebDriver threadedDriver()
     {
         return threadLocal.get();
     }
@@ -43,13 +45,13 @@ public class BaseTestThreadLocal
     public void closeBrowser()
     {
         try {
-            Thread.sleep(2000);
+            Thread.sleep(4000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        if (getDriver()!=null)
+        if (threadedDriver()!=null)
         {
-            getDriver().quit();
+            threadedDriver().quit();
             threadLocal.remove();
         }
     }

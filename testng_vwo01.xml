@@ -3,10 +3,9 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="C:/Users/amitk/IdeaProjects/BasicPOM_SeleniumFramework">
         <classes>
-            <class name="org.pratima.Tests.LoginTest">
+            <class name="org.pratima.Tests.VwoTest">
                 <methods>
-                    <include name="loginVWO"/>
-                    <include name="loginTestingAcademy"/>
+                    <include name="createFreeAccount"/>
                 </methods>
             </class>
         </classes>
