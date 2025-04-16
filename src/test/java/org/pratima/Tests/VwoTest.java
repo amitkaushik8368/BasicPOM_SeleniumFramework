@@ -1,6 +1,7 @@
 package org.pratima.Tests;
 
 import org.pratima.BoilerPlate.BaseTestThreadLocal;
+import org.pratima.Pages.LoginPage;
 import org.testng.annotations.Test;
 
 public class VwoTest extends BaseTestThreadLocal
@@ -10,5 +11,8 @@ public class VwoTest extends BaseTestThreadLocal
     {
         threadedDriver().get("https://app.vwo.com/#/login");
 
+        LoginPage.takeFullScreenshot(threadedDriver());
+
+        threadedDriver().quit();
     }
 }

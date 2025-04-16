@@ -1,33 +1,39 @@
 package org.pratima.Tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.pratima.BoilerPlate.BaseTest;
 import org.pratima.BoilerPlate.BaseTestMultiBrowser;
 import org.pratima.BoilerPlate.BaseTestThreadLocal;
+import org.pratima.Pages.LoginPage;
+import org.pratima.Utilities.TestListener;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.sql.Time;
 import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 
+@Listeners(TestListener.class)
 public class LoginTest extends BaseTestThreadLocal
 {
     @Test
-    public void launchBing()
-    {
-        threadedDriver().get("https://www.bing.com/");
-        threadedDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
-        //driver.get("https://app.vwo.com/");
+    public void loginVWO() {
 
-        // Put assertion on text "Basic Account Setup"
-    }
+        threadedDriver().get("https://app.vwo.com");
+        LoginPage loginPage = new LoginPage(threadedDriver());
+        loginPage.enterLoginEmail("amit.kaushik9466@gmail.com");
+        loginPage.enterLoginPass("Amit@123");
+        loginPage.clickLoginButton();
 
+        WebDriverWait wait = new WebDriverWait(threadedDriver(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[text()='Basic Account Setup']")));
+        WebElement dashElement = threadedDriver().findElement(By.xpath("//h1[text()='Basic Account Setup']"));
+        Assert.assertEquals(dashElement.getText(), "Basic Account Setu");
 
-    @Test
-    public void launchGoogle()
-    {
-        threadedDriver().get("https://www.google.com/");
 
     }
 }
