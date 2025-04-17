@@ -1,6 +1,7 @@
 package org.pratima.Tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -32,7 +33,18 @@ public class LoginTest extends BaseTestThreadLocal
         WebDriverWait wait = new WebDriverWait(threadedDriver(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[text()='Basic Account Setup']")));
         WebElement dashElement = threadedDriver().findElement(By.xpath("//h1[text()='Basic Account Setup']"));
-        Assert.assertEquals(dashElement.getText(), "Basic Account Setu");
+
+        threadedDriver().navigate().refresh();
+        try {
+            Assert.assertEquals(dashElement.getText(), "Basic Account Setup");
+        }catch (StaleElementReferenceException e)
+        {
+            System.out.println("Stale Exception appeared: " + e.getMessage());
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[text()='Basic Account Setup']")));
+            WebElement dashElement_1 = threadedDriver().findElement(By.xpath("//h1[text()='Basic Account Setup']"));
+            Assert.assertEquals(dashElement_1.getText(), "Basic Account Setup");
+        }
+
 
 
     }

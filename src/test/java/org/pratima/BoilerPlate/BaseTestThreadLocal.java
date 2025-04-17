@@ -17,7 +17,7 @@ public class BaseTestThreadLocal
 
     @BeforeMethod
     @Parameters("browser")
-    public void startBrowser(@Optional("chrome") String browser)
+    public void startBrowser(@Optional("edge") String browser)
     {
         WebDriver localDriver = null;
         switch (browser.toLowerCase()){

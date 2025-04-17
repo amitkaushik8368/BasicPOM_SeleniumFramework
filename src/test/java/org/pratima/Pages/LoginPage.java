@@ -125,6 +125,7 @@ public class LoginPage
 
     public static void takeFullScreenshot(WebDriver driver)
     {
+
         File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         String timestamp = new SimpleDateFormat("YYYYmmdd_HHmmss").format(new Date());
         String screenshotPath = System.getProperty("user.dir")  + "/src/test/java/org/pratima/Screenshots/screenshot_"+ timestamp+".png";
