@@ -14,6 +14,7 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import javax.swing.text.Utilities;
 import java.sql.Time;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -21,7 +22,7 @@ import java.time.temporal.ChronoUnit;
 @Listeners(TestListener.class)
 public class LoginTest extends BaseTestThreadLocal
 {
-    @Test
+    @Test(retryAnalyzer = org.pratima.Utilities.TestListener.class)
     public void loginVWO() {
 
         threadedDriver().get("https://app.vwo.com");
@@ -42,7 +43,7 @@ public class LoginTest extends BaseTestThreadLocal
             System.out.println("Stale Exception appeared: " + e.getMessage());
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[text()='Basic Account Setup']")));
             WebElement dashElement_1 = threadedDriver().findElement(By.xpath("//h1[text()='Basic Account Setup']"));
-            Assert.assertEquals(dashElement_1.getText(), "Basic Account Setup");
+            Assert.assertEquals(dashElement_1.getText(), "Basic Account Setu");
         }
 
 
