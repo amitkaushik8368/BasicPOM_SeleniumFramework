@@ -134,6 +134,7 @@ public class LoginPage
         try {
             FileUtils.copyFile(src,dest);
         } catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
 

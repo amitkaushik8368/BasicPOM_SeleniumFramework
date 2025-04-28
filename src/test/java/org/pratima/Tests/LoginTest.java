@@ -22,6 +22,7 @@ import java.time.temporal.ChronoUnit;
 @Listeners(TestListener.class)
 public class LoginTest extends BaseTestThreadLocal
 {
+
     @Test(retryAnalyzer = org.pratima.Utilities.TestListener.class)
     public void loginVWO() {
 
